@@ -15,8 +15,10 @@ protocol NetworkServicing {
 
 enum NetworkError: Error {
     case invalidURL
-    case invalidResponse
-    case decodingError(Error)
+    case invalidResponse(code: Int)
+    case decodingError(error: Error)
+    case noInternet
+    case timeout
 }
 
 final class NetworkService: NetworkServicing {
@@ -38,11 +40,31 @@ final class NetworkService: NetworkServicing {
             throw NetworkError.invalidURL
         }
         
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let data: Data
+        let response: URLResponse
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              200...299 ~= httpResponse.statusCode else {
-            throw NetworkError.invalidResponse
+        do {
+            (data, response) = try await URLSession.shared.data(from: url)
+        } catch let urlError as URLError {
+            
+            switch urlError.code {
+            case .notConnectedToInternet:
+                throw NetworkError.noInternet
+                
+            case .timedOut:
+                throw NetworkError.timeout
+                
+            default:
+                throw urlError
+            }
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse(code: 0)
+        }
+        
+        guard 200...299 ~= httpResponse.statusCode else {
+            throw NetworkError.invalidResponse(code: httpResponse.statusCode)
         }
         
         let decoder = JSONDecoder()
@@ -51,7 +73,7 @@ final class NetworkService: NetworkServicing {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw NetworkError.decodingError(error)
+            throw NetworkError.decodingError(error: error)
         }
     }
 }

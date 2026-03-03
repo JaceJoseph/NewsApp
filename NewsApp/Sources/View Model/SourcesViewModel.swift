@@ -43,8 +43,16 @@ class SourcesViewModel {
                 filteredSources = response.sources
                 delegate?.didUpdateSources()
                 
+            } catch NetworkError.noInternet{
+                delegate?.didReceiveError("Sorry, no internet access detected")
+            } catch NetworkError.timeout{
+                delegate?.didReceiveError("Sorry, getting the sources took way too long")
+            } catch let NetworkError.invalidResponse(code){
+                delegate?.didReceiveError("Error \(code): Sorry, failed to load the sources")
+            } catch let NetworkError.decodingError(error){
+                delegate?.didReceiveError("\(error.localizedDescription): Sorry, failed to load sources")
             } catch {
-                delegate?.didReceiveError("Failed to load sources.")
+                delegate?.didReceiveError("Sorry, failed to load sources.")
             }
             delegate?.didFinishLoading()
         }
