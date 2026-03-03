@@ -18,12 +18,17 @@ class ArticlesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "title"
-        self.navigationItem.backButtonTitle = "Back"
+        self.navigationItem.backButtonTitle = "Back to sources"
         setupTableView()
         setupSearchBar()
         vm.delegate = self
         vm.fetchArticles()
+        scrollUpButton.layer.cornerRadius = scrollUpButton.frame.height / 2
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.title = "\(vm.getSourceID.capitalized) - \(vm.getCategory.capitalized)"
     }
     
     private func setupTableView() {

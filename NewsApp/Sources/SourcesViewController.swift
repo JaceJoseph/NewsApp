@@ -18,7 +18,7 @@ class SourcesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "News Sources"
-        self.navigationItem.backButtonTitle = "Back"
+        self.navigationItem.backButtonTitle = "Back to category"
         setupTable()
         setupSearchBar()
         setupVM()
