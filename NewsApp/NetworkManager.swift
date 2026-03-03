@@ -6,13 +6,20 @@
 //
 
 import Foundation
+protocol NetworkServicing {
+    func get<T: Decodable>(
+        endpoint: String,
+        queryItems: [URLQueryItem]?
+    ) async throws -> T
+}
+
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse
     case decodingError(Error)
 }
 
-final class NetworkService {
+final class NetworkService: NetworkServicing {
     static let shared = NetworkService()
     private let baseURL = "https://newsapi.org/v2/"
     private init() {}
@@ -49,3 +56,7 @@ final class NetworkService {
         }
     }
 }
+// GET https://newsapi.org/v2/top-headlines/sources?q=\(keyword)&category=\(category)&apiKey=\(apiToken) (get sources from category)
+// GET https://newsapi.org/v2/top-headlines?q=\(keyword)&sources=\(sourceID)&apiKey=\(apiToken) (get articles from sources)
+
+// GET https://newsapi.org/v2/top-headlines?q=trump&apiKey=1bf317ea5ccd4c918df60076da6cb627 (ex for query search)

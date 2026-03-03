@@ -43,3 +43,9 @@ struct ArticleSource: Codable {
     let id: String?
     let name: String
 }
+
+struct ArticleCategory {
+    let id: String
+    let title: String
+    let description: String
+}
