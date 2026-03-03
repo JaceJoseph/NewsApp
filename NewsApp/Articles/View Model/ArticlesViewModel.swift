@@ -66,7 +66,7 @@ class ArticlesViewModel {
                     endpoint: "https://newsapi.org/v2/top-headlines",
                     queryItems: [
                         URLQueryItem(name: "q", value: currentKeyword),
-                        URLQueryItem(name: "category", value: getCategory),
+                        URLQueryItem(name: "sources", value: getSourceID),
                         URLQueryItem(name: "apiKey", value: NetworkHelper().getAPIToken),
                         URLQueryItem(name: "page", value: "\(currentPage)"),
                         URLQueryItem(name: "pageSize", value: "\(pageSize)")

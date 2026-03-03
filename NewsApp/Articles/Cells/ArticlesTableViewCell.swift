@@ -54,7 +54,10 @@ class ArticlesTableViewCell: UITableViewCell {
         publishedBy.text = "published by: \(article.author ?? "anonymous")".uppercased()
         publishedAt.text = "published at: \(article.publishedAtFormatted)".uppercased()
         descriptionLabel.text = article.description ?? "No Description Provided"
-        let url = URL(string: article.urlToImage ?? "")
+        guard let url = URL(string: article.urlToImage ?? "") else {
+            newsImage.image = UIImage(named: category)
+            return
+        }
         newsImage.kf.indicatorType = .activity
         newsImage.kf.setImage(with: url)
     }
