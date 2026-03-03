@@ -1,22 +1,78 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticlesViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticlesViewController" customModule="NewsApp" customModuleProvider="target">
             <connections>
+                <outlet property="scrollUpButton" destination="bre-Md-dYK" id="bov-x1-rhL"/>
+                <outlet property="searchBar" destination="xx5-Y5-H3B" id="RuL-f3-oIZ"/>
+                <outlet property="tableView" destination="MPI-bv-QR4" id="YF7-2Y-qRX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="xx5-Y5-H3B">
+                    <rect key="frame" x="0.0" y="118" width="393" height="64"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Hk8-KZ-V6I"/>
+                    </connections>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="MPI-bv-QR4">
+                    <rect key="frame" x="0.0" y="182" width="393" height="670"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bre-Md-dYK">
+                    <rect key="frame" x="345" y="736" width="36" height="36"/>
+                    <color key="backgroundColor" systemColor="linkColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="9hM-6h-j2x"/>
+                        <constraint firstAttribute="width" constant="36" id="jf0-vf-NZo"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <imageReference key="image" image="chevron.up" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="scrollUpButtonTapped:" destination="-1" eventType="touchUpInside" id="wJG-Ul-KLU"/>
+                    </connections>
+                </button>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="MPI-bv-QR4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5Fq-7B-FO9"/>
+                <constraint firstItem="xx5-Y5-H3B" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Lkf-7S-tvP"/>
+                <constraint firstItem="xx5-Y5-H3B" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aTI-M8-Kzh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MPI-bv-QR4" secondAttribute="trailing" id="fKR-Ca-jNj"/>
+                <constraint firstItem="MPI-bv-QR4" firstAttribute="top" secondItem="xx5-Y5-H3B" secondAttribute="bottom" id="hEk-pX-xeU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bre-Md-dYK" secondAttribute="trailing" constant="12" id="kxT-1V-PhJ"/>
+                <constraint firstItem="xx5-Y5-H3B" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="uEW-mO-DnA"/>
+                <constraint firstAttribute="bottom" secondItem="MPI-bv-QR4" secondAttribute="bottom" id="voE-TA-5hn"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bre-Md-dYK" secondAttribute="bottom" constant="12" id="vxB-1c-IBe"/>
+            </constraints>
+            <point key="canvasLocation" x="51" y="70"/>
         </view>
     </objects>
+    <resources>
+        <image name="chevron.up" catalog="system" width="128" height="70"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -12,6 +12,7 @@ class SourcesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let vm = SourcesViewModel()
+    let emptyView = EmptyStateView()
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
@@ -54,12 +55,18 @@ extension SourcesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // navigates to articles
+        let index = indexPath.row
+        let source = vm.filteredSources[index]
+        let vc = ArticlesViewController()
+        vc.vm.category = vm.getCategoryID
+        vc.vm.sourceID = source.id
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension SourcesViewController: NewsSourcesViewModelDelegate {
     func didStartLoading() {
+        tableView.backgroundView = nil
         showLoading()
     }
     
@@ -68,6 +75,11 @@ extension SourcesViewController: NewsSourcesViewModelDelegate {
     }
     
     func didUpdateSources() {
+        if vm.filteredSources.isEmpty {
+            tableView.backgroundView = emptyView
+        } else {
+            tableView.backgroundView = nil
+        }
         tableView.reloadData()
     }
     

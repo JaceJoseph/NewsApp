@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 
 class ArticlesWebViewViewController: UIViewController {
+    var urlString: String = ""
     private var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ class ArticlesWebViewViewController: UIViewController {
     }
     
     private func loadPage() {
-        guard let url = URL(string: "https://www.apple.com") else { return }
+        guard let url = URL(string: urlString) else { return }
         webView.load(URLRequest(url: url))
     }
     
