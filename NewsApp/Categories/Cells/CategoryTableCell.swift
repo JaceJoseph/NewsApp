@@ -15,7 +15,8 @@ class CategoryTableCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        containerView.layer.cornerRadius = 8
+        categoryImage.layer.cornerRadius = 8
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

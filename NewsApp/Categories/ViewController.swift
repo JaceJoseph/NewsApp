@@ -38,7 +38,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
         let category = vm.getCategory(index: index)
-        // navigate
+        let vc = SourcesViewController()
+        vc.vm.categoryID = category.id
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

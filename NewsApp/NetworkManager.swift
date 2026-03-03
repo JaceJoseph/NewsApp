@@ -21,7 +21,6 @@ enum NetworkError: Error {
 
 final class NetworkService: NetworkServicing {
     static let shared = NetworkService()
-    private let baseURL = "https://newsapi.org/v2/"
     private init() {}
     
     func get<T: Decodable>(
@@ -56,7 +55,7 @@ final class NetworkService: NetworkServicing {
         }
     }
 }
-// GET https://newsapi.org/v2/top-headlines/sources?q=\(keyword)&category=\(category)&apiKey=\(apiToken) (get sources from category)
-// GET https://newsapi.org/v2/top-headlines?q=\(keyword)&sources=\(sourceID)&apiKey=\(apiToken) (get articles from sources)
+// GET https://newsapi.org/v2/top-headlines/sources?q=\(keyword)&category=\(category)&apiKey=\(apiToken)&pageSize=20&page=\(page) (get sources from category)
+// GET https://newsapi.org/v2/top-headlines?q=\(keyword)&sources=\(sourceID)&apiKey=\(apiToken)&pageSize=20&page=\(page) (get articles from sources)
 
-// GET https://newsapi.org/v2/top-headlines?q=trump&apiKey=1bf317ea5ccd4c918df60076da6cb627 (ex for query search)
+// GET https://newsapi.org/v2/top-headlines?q=a&apiKey=1bf317ea5ccd4c918df60076da6cb627&pageSize=20&page=1 (ex for query search)
