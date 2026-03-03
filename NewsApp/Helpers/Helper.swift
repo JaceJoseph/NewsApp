@@ -15,6 +15,22 @@ class NetworkHelper {
         }
         return value
     }
+    
+    func formatISODateString(_ isoString: String) -> String? {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime]
+
+        guard let date = isoFormatter.date(from: isoString) else {
+            return nil
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "dd MMM yyyy, HH:mm:ss"
+        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        outputFormatter.timeZone = TimeZone.current // or set specific timezone if needed
+
+        return outputFormatter.string(from: date)
+    }
 }
 
 private let loadingIndicatorTag = 999_999
@@ -86,35 +102,5 @@ extension UIViewController {
                 toastContainer.removeFromSuperview()
             })
         })
-    }
-}
-
-actor ImageLoader {
-    static let shared = ImageLoader()
-    private let cache = NSCache<NSString, UIImage>()
-    
-    func loadImage(from urlString: String) async throws -> UIImage {
-        
-        if let cached = cache.object(forKey: urlString as NSString) {
-            return cached
-        }
-        
-        guard let url = URL(string: urlString) else {
-            throw NetworkError.invalidURL
-        }
-        
-        let (data, response) = try await URLSession.shared.data(from: url)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              200...299 ~= httpResponse.statusCode else {
-            throw NetworkError.invalidResponse
-        }
-        
-        guard let image = UIImage(data: data) else {
-            throw NetworkError.invalidResponse
-        }
-        
-        cache.setObject(image, forKey: urlString as NSString)
-        return image
     }
 }
