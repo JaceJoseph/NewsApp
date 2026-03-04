@@ -34,6 +34,22 @@ final class MockArticlesDelegate: ArticlesViewModelDelegate {
 
 @MainActor
 final class ArticlesViewModelTest: XCTestCase {
+    func testGetCategory() {
+        let mockNetwork = MockNetworkService()
+        let viewModel = ArticlesViewModel(networkService: mockNetwork)
+        XCTAssertNil(viewModel.getCategory)
+        viewModel.category = "Sports"
+        XCTAssertEqual("Sports", viewModel.getCategory)
+    }
+    
+    func testGetSource() {
+        let mockNetwork = MockNetworkService()
+        let viewModel = ArticlesViewModel(networkService: mockNetwork)
+        XCTAssertNil(viewModel.getSourceID)
+        viewModel.sourceID = "bbc-news"
+        XCTAssertEqual("bbc-news", viewModel.getSourceID)
+    }
+    
     func testFetchArticlesSuccessFirstPage() async {
         let mockNetwork = MockNetworkService()
         let mockDelegate = MockArticlesDelegate()
