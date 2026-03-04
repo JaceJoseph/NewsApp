@@ -22,7 +22,9 @@ class ArticlesViewController: UIViewController {
         setupTableView()
         setupSearchBar()
         vm.delegate = self
-        vm.fetchArticles()
+        Task {
+            await vm.fetchArticles()
+        }
         scrollUpButton.layer.cornerRadius = scrollUpButton.frame.height / 2
     }
     
@@ -84,7 +86,9 @@ extension ArticlesViewController: UITableViewDataSourcePrefetching {
         let threshold = max(vm.articles.count - 5, 0)
         
         if maxRow >= threshold {
-            vm.fetchArticles()
+            Task {
+                await vm.fetchArticles()
+            }
         }
     }
 }
@@ -135,12 +139,16 @@ extension ArticlesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         searchBar.resignFirstResponder()
-        vm.searchArticles(keyword: text)
+        Task {
+            await vm.searchArticles(keyword: text)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            vm.searchArticles(keyword: "")
+            Task {
+                await vm.searchArticles(keyword: "")
+            }
         }
     }
 }

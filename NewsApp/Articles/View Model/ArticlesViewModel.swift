@@ -42,12 +42,12 @@ class ArticlesViewModel {
         self.networkService = networkService
     }
     
-    func searchArticles(keyword: String) {
+    func searchArticles(keyword: String) async {
         currentKeyword = keyword
-        fetchArticles(reset: true)
+        await fetchArticles(reset: true)
     }
     
-    func fetchArticles(reset: Bool = false) {
+    func fetchArticles(reset: Bool = false) async {
         if reset {
             currentPage = 1
             canLoadMore = true
@@ -60,44 +60,43 @@ class ArticlesViewModel {
         isLoading = true
         delegate?.didStartLoading()
 
-        Task {
-            do {
-                let response: NewsArticlesResponse = try await networkService.get(
-                    endpoint: "https://newsapi.org/v2/top-headlines",
-                    queryItems: [
-                        URLQueryItem(name: "q", value: currentKeyword),
-                        URLQueryItem(name: "sources", value: getSourceID),
-                        URLQueryItem(name: "apiKey", value: NetworkHelper().getAPIToken),
-                        URLQueryItem(name: "page", value: "\(currentPage)"),
-                        URLQueryItem(name: "pageSize", value: "\(pageSize)")
-                    ]
-                )
-                
-                let newArticles = response.articles
-                
-                if newArticles.count < pageSize {
-                    canLoadMore = false
-                }
-                
-                articles.append(contentsOf: newArticles)
-                currentPage += 1
-                
-                delegate?.didUpdateArticles()
-                
-            } catch NetworkError.noInternet{
-                delegate?.didReceiveError("Sorry, no internet access detected")
-            } catch NetworkError.timeout{
-                delegate?.didReceiveError("Sorry, getting the articles took way too long")
-            } catch let NetworkError.invalidResponse(code){
-                delegate?.didReceiveError("Error \(code): Sorry, failed to load the articles")
-            } catch let NetworkError.decodingError(error){
-                delegate?.didReceiveError("\(error.localizedDescription): Sorry, failed to load articles")
-            } catch {
-                delegate?.didReceiveError("Sorry, failed to load sources.")
+        do {
+            let response: NewsArticlesResponse = try await networkService.get(
+                endpoint: "https://newsapi.org/v2/top-headlines",
+                queryItems: [
+                    URLQueryItem(name: "q", value: currentKeyword),
+                    URLQueryItem(name: "sources", value: getSourceID),
+                    URLQueryItem(name: "apiKey", value: NetworkHelper().getAPIToken),
+                    URLQueryItem(name: "page", value: "\(currentPage)"),
+                    URLQueryItem(name: "pageSize", value: "\(pageSize)")
+                ]
+            )
+            
+            let newArticles = response.articles
+            
+            if newArticles.count < pageSize {
+                canLoadMore = false
             }
             
-            isLoading = false
-            delegate?.didFinishLoading()
+            articles.append(contentsOf: newArticles)
+            currentPage += 1
+            
+            delegate?.didUpdateArticles()
+            
+        } catch NetworkError.noInternet{
+            delegate?.didReceiveError("Sorry, no internet access detected")
+        } catch NetworkError.timeout{
+            delegate?.didReceiveError("Sorry, getting the articles took way too long")
+        } catch let NetworkError.invalidResponse(code){
+            delegate?.didReceiveError("Error \(code): Sorry, failed to load the articles")
+        } catch let NetworkError.decodingError(error){
+            delegate?.didReceiveError("\(error.localizedDescription): Sorry, failed to load articles")
+        } catch {
+            delegate?.didReceiveError("Sorry, failed to load sources.")
         }
+        
+        isLoading = false
+        delegate?.didFinishLoading()
     }
+    
 }

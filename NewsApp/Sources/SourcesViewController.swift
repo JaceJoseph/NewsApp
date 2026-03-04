@@ -37,7 +37,9 @@ class SourcesViewController: UIViewController {
     
     private func setupVM() {
         vm.delegate = self
-        vm.fetchSources()
+        Task {
+            await vm.fetchSources()
+        }
     }
 }
 
