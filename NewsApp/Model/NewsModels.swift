@@ -35,15 +35,11 @@ struct NewsArticle: Codable {
     let description: String?
     let url: String
     let urlToImage: String?
-    let publishedAt: Date?
+    let publishedAt: String?
     let content: String?
     
     var publishedAtFormatted: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy, HH:mm:ss"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone.current
-        return formatter.string(from: publishedAt ?? Date())
+        return NetworkHelper().formatISO8601DateString(publishedAt)
     }
 }
 

@@ -16,20 +16,35 @@ class NetworkHelper {
         return value
     }
     
-    func formatISODateString(_ isoString: String) -> String? {
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime]
+    func formatISO8601DateString(
+        _ isoString: String?,
+        outputFormat: String = "dd MMM yyyy, HH:mm"
+    ) -> String {
+        guard let isoString else { return "" }
 
-        guard let date = isoFormatter.date(from: isoString) else {
-            return nil
+        // ISO8601 with fractional seconds
+        let isoWithFraction = ISO8601DateFormatter()
+        isoWithFraction.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        // ISO8601 without fractional seconds
+        let iso = ISO8601DateFormatter()
+        iso.formatOptions = [.withInternetDateTime]
+
+        var date: Date?
+        if let parsedDate = isoWithFraction.date(from: isoString) {
+            date = parsedDate
+        } else if let parsedDate = iso.date(from: isoString) {
+            date = parsedDate
         }
 
-        let outputFormatter = DateFormatter()
-        outputFormatter.dateFormat = "dd MMM yyyy, HH:mm:ss"
-        outputFormatter.locale = Locale(identifier: "en_US_POSIX")
-        outputFormatter.timeZone = TimeZone.current // or set specific timezone if needed
+        guard let finalDate = date else { return isoString } // fallback to raw
 
-        return outputFormatter.string(from: date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = outputFormat
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone.current
+
+        return formatter.string(from: finalDate)
     }
 }
 

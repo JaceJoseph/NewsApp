@@ -27,11 +27,6 @@ class ArticlesTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        shadowView.layer.shadowPath = UIBezierPath(
-            roundedRect: shadowView.bounds,
-            cornerRadius: 12
-        ).cgPath
     }
 
     private func setupCard() {
