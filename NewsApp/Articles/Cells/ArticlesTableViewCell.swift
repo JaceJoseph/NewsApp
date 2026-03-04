@@ -33,7 +33,7 @@ class ArticlesTableViewCell: UITableViewCell {
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
         shadowView.layer.cornerRadius = 8
-        shadowView.layer.shadowColor = UIColor.black.cgColor
+        shadowView.layer.shadowColor = UIColor.label.cgColor
         shadowView.layer.shadowOpacity = 0.12
         shadowView.layer.shadowOffset = CGSize(width: 0, height: 4)
         shadowView.layer.shadowRadius = 8
