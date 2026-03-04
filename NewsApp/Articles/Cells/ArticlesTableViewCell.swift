@@ -21,7 +21,6 @@ class ArticlesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         backgroundColor = .clear
         contentView.backgroundColor = .clear
-        selectionStyle = .none
         setupCard()
     }
     
@@ -30,6 +29,7 @@ class ArticlesTableViewCell: UITableViewCell {
     }
 
     private func setupCard() {
+        selectionStyle = .none
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
         shadowView.layer.cornerRadius = 8

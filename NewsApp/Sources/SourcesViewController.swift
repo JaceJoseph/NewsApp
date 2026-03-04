@@ -32,7 +32,7 @@ class SourcesViewController: UIViewController {
     
     private func setupSearchBar() {
         searchBar.delegate = self
-        searchBar.showsCancelButton = true
+//        searchBar.showsCancelButton = true
     }
     
     private func setupVM() {

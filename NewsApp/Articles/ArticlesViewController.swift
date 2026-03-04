@@ -42,7 +42,7 @@ class ArticlesViewController: UIViewController {
     
     private func setupSearchBar() {
         searchBar.delegate = self
-        searchBar.showsCancelButton = true
+//        searchBar.showsCancelButton = true
     }
     
     @IBAction func scrollUpButtonTapped(_ sender: Any) {
