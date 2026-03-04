@@ -28,7 +28,7 @@ class ArticlesTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
 
-    private func setupCard() {
+    private func setupCard() { // set shadow to make it like a card
         selectionStyle = .none
         containerView.layer.cornerRadius = 8
         containerView.layer.masksToBounds = true
@@ -44,15 +44,17 @@ class ArticlesTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configCell(article: NewsArticle, category: String = "general") {
+    func configCell(article: NewsArticle, category: String = "general") { // config cell with Data
         newsTitle.text = article.title
         publishedBy.text = "published by: \(article.author ?? "anonymous")".uppercased()
         publishedAt.text = "published at: \(article.publishedAtFormatted)".uppercased()
         descriptionLabel.text = article.description ?? "No Description Provided"
+        // if url is empty/not valid, return placeholder image
         guard let url = URL(string: article.urlToImage ?? "") else {
             newsImage.image = UIImage(named: category)
             return
         }
+        // sets image with Kingfisher and stores it in the cache to lighten resources when encountering similar URL
         newsImage.kf.indicatorType = .activity
         newsImage.kf.setImage(with: url)
     }

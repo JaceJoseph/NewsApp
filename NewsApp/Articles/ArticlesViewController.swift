@@ -42,7 +42,6 @@ class ArticlesViewController: UIViewController {
     
     private func setupSearchBar() {
         searchBar.delegate = self
-//        searchBar.showsCancelButton = true
     }
     
     @IBAction func scrollUpButtonTapped(_ sender: Any) {
@@ -81,6 +80,7 @@ extension ArticlesViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ArticlesViewController: UITableViewDataSourcePrefetching {
+    // uses prefetch to fetch more articles when scrolling. when user reaches the 5 last row, tells view model to pre-fetch
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         guard let maxRow = indexPaths.map({ $0.row }).max() else { return }
         let threshold = max(vm.articles.count - 5, 0)
@@ -93,7 +93,7 @@ extension ArticlesViewController: UITableViewDataSourcePrefetching {
     }
 }
 
-extension ArticlesViewController { // Pagination Logics
+extension ArticlesViewController { // Pagination Logics to show footer loading
     func showFooterLoading() {
         footerSpinner.startAnimating()
         footerSpinner.frame = CGRect(x: 0, y: 0, width: 0, height: 44)

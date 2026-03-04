@@ -6,6 +6,7 @@
 //
 
 import Foundation
+/// <#Description#>
 protocol NetworkServicing {
     func get<T: Decodable>(
         endpoint: String,
@@ -13,6 +14,7 @@ protocol NetworkServicing {
     ) async throws -> T
 }
 
+/// <#Description#>
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse(code: Int)
@@ -21,9 +23,15 @@ enum NetworkError: Error {
     case timeout
 }
 
+/// <#Description#>
 final class NetworkService: NetworkServicing {
     static let shared = NetworkService()
     private init() {}
+    /// <#Description#>
+    /// - Parameters:
+    ///   - endpoint: <#endpoint description#>
+    ///   - queryItems: <#queryItems description#>
+    /// - Returns: <#description#>
     func get<T: Decodable>(
         endpoint: String,
         queryItems: [URLQueryItem]? = nil
@@ -92,7 +100,3 @@ final class NetworkService: NetworkServicing {
         }
     }
 }
-// GET https://newsapi.org/v2/top-headlines/sources?q=\(keyword)&category=\(category)&apiKey=\(apiToken)&pageSize=20&page=\(page) (get sources from category)
-// GET https://newsapi.org/v2/top-headlines?q=\(keyword)&sources=\(sourceID)&apiKey=\(apiToken)&pageSize=20&page=\(page) (get articles from sources)
-
-// GET https://newsapi.org/v2/top-headlines?q=a&apiKey=1bf317ea5ccd4c918df60076da6cb627&pageSize=20&page=1 (ex for query search)

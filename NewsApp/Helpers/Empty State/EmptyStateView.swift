@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Empty State used as a Table View background when the data is empty
 class EmptyStateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)

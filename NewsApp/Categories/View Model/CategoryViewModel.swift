@@ -6,6 +6,7 @@
 //
 
 import Foundation
+/// View Model for CategoryViewController (View Controller), contains the array of Categories and a function to fetch certain Category
 class CategoryViewModel {
     let newsCategory: [ArticleCategory] = [
         ArticleCategory(id: "general", title: "GENERAL", description: "The general news, ready to be perused by you, giving you the latest trending news available for you"),
@@ -17,6 +18,9 @@ class CategoryViewModel {
         ArticleCategory(id: "science", title: "SCIENCE", description: "Explore more and deepen your knowledge with the breakthrough in science, available for you to browse in the latest science related news")
     ]
     
+    /// Function to get a Category, based on the index passed
+    /// - Parameter index: an integer passed, usually by tableView's row
+    /// - Returns: returns an Article Category from newsCategory baed on the index passed
     func getCategory(index: Int) -> ArticleCategory {
         return newsCategory[index]
     }

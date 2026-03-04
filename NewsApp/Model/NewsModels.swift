@@ -7,11 +7,13 @@
 
 import Foundation
 
+/// Model that contains the responses for News Sources
 struct NewsSourcesResponse: Codable {
     let status: String
     let sources: [NewsSource]
 }
 
+/// Model of a singular News Source
 struct NewsSource: Codable {
     let id: String?
     let name: String
@@ -22,12 +24,14 @@ struct NewsSource: Codable {
     let country: String
 }
 
+/// Model that contains the responses for NewsArticle
 struct NewsArticlesResponse: Codable {
     let status: String
     let totalResults: Int
     let articles: [NewsArticle]
 }
 
+/// Model for a singular news article
 struct NewsArticle: Codable {
     let source: ArticleSource
     let author: String?
@@ -43,11 +47,13 @@ struct NewsArticle: Codable {
     }
 }
 
+/// Model for a the source of a  news article
 struct ArticleSource: Codable {
     let id: String?
     let name: String
 }
 
+/// Model for Article Categories
 struct ArticleCategory {
     let id: String
     let title: String
