@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		88D188BA2F56FE8D00B94F06 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 88D188B92F56FE8D00B94F06 /* Kingfisher */; };
 		88D188D82F57ECDF00B94F06 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88D188D72F57ECDF00B94F06 /* IQKeyboardManagerSwift */; };
+		88D188DA2F57FCC800B94F06 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 88D188D92F57FCC800B94F06 /* Documentation.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +33,7 @@
 		88D188282F56CB5F00B94F06 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D1883E2F56CB6800B94F06 /* NewsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D188482F56CB6800B94F06 /* NewsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D188D92F57FCC800B94F06 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -95,6 +97,7 @@
 		88D1881F2F56CB5F00B94F06 = {
 			isa = PBXGroup;
 			children = (
+				88D188D92F57FCC800B94F06 /* Documentation.docc */,
 				88D1882A2F56CB5F00B94F06 /* NewsApp */,
 				88D188412F56CB6800B94F06 /* NewsAppTests */,
 				88D1884B2F56CB6800B94F06 /* NewsAppUITests */,
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D188DA2F57FCC800B94F06 /* Documentation.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
