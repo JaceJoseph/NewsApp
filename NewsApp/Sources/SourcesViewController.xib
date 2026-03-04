@@ -2,7 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SourcesViewController" customModule="NewsApp" customModuleProvider="target">
             <connections>
+                <outlet property="scrollUpButton" destination="ddX-KE-Jqr" id="rAx-yL-7lh"/>
                 <outlet property="searchBar" destination="AaZ-Dk-oFM" id="U6u-o3-v8p"/>
                 <outlet property="tableView" destination="elF-1Q-Kjg" id="4Qh-Ji-m9C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,25 +24,63 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="elF-1Q-Kjg">
-                    <rect key="frame" x="0.0" y="182" width="393" height="670"/>
+                    <rect key="frame" x="0.0" y="254.33333333333331" width="393" height="597.66666666666674"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="AaZ-Dk-oFM">
+                <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddX-KE-Jqr">
+                    <rect key="frame" x="341" y="732" width="36" height="36"/>
+                    <color key="backgroundColor" systemColor="linkColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="0lu-gK-0E6"/>
+                        <constraint firstAttribute="height" constant="36" id="r9O-kp-5lC"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <imageReference key="image" image="chevron.up" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="scrollUpButtonTapped:" destination="-1" eventType="touchUpInside" id="Kai-Ro-Z2Z"/>
+                    </connections>
+                </button>
+                <searchBar contentMode="redraw" placeholder="Search your favourite news source" translatesAutoresizingMaskIntoConstraints="NO" id="AaZ-Dk-oFM">
                     <rect key="frame" x="0.0" y="118" width="393" height="64"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="MZv-DQ-EAK"/>
                     </connections>
                 </searchBar>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fot-OD-0iM">
+                    <rect key="frame" x="16" y="190" width="361" height="56.333333333333343"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get the top Headlines from these sources" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRA-Ra-H0h">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="20.333333333333332"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to access news article by the selected news source" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgj-qX-fqI">
+                            <rect key="frame" x="0.0" y="20.333333333333343" width="361" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AaZ-Dk-oFM" secondAttribute="trailing" id="3CM-IH-POp"/>
+                <constraint firstItem="fot-OD-0iM" firstAttribute="top" secondItem="AaZ-Dk-oFM" secondAttribute="bottom" constant="8" id="9yM-iZ-6Dt"/>
                 <constraint firstItem="AaZ-Dk-oFM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Cu4-ky-YfV"/>
+                <constraint firstItem="fot-OD-0iM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="D1V-hn-nbU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fot-OD-0iM" secondAttribute="trailing" constant="16" id="HOY-OI-cdM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="elF-1Q-Kjg" secondAttribute="trailing" id="Hzb-6l-sbV"/>
-                <constraint firstItem="elF-1Q-Kjg" firstAttribute="top" secondItem="AaZ-Dk-oFM" secondAttribute="bottom" id="MJb-Pe-SHW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ddX-KE-Jqr" secondAttribute="trailing" constant="16" id="SVd-Ud-IA9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ddX-KE-Jqr" secondAttribute="bottom" constant="16" id="Wl3-B6-rJk"/>
                 <constraint firstItem="elF-1Q-Kjg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ao6-xj-uVr"/>
+                <constraint firstItem="elF-1Q-Kjg" firstAttribute="top" secondItem="fot-OD-0iM" secondAttribute="bottom" constant="8" id="b8P-qL-FSy"/>
                 <constraint firstItem="AaZ-Dk-oFM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bkI-ka-SnE"/>
                 <constraint firstAttribute="bottom" secondItem="elF-1Q-Kjg" secondAttribute="bottom" id="ei9-ab-PDJ"/>
             </constraints>
@@ -47,6 +88,13 @@
         </view>
     </objects>
     <resources>
+        <image name="chevron.up" catalog="system" width="128" height="70"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

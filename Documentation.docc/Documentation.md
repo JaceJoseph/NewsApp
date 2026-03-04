@@ -26,3 +26,6 @@ articles screen.
 ## Packages Used
 - Kingfisher: used to handle image loading from URL with built in caching images to lighten the load and fasten load time when the same URL is encountered again for images.
 - IQKeyboardManager: used to handle keyboard related logics, such as text field movement when keyboard is obstructing and dismissing when not touching the text field globally.
+
+## API Section Used
+API used from https://newsapi.org/. is the top-headlines one, not the everything, because the user story has the need for a main screen with category, in which source opens the source from the selected category, and continues into articles. This is not supported with everything, and is supported by top-headlines. This is why top-headlines is used.

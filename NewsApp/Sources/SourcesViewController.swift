@@ -10,6 +10,7 @@ import UIKit
 class SourcesViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var scrollUpButton: UIButton!
     
     let vm = SourcesViewModel()
     let emptyView = EmptyStateView()
@@ -22,6 +23,7 @@ class SourcesViewController: UIViewController {
         setupTable()
         setupSearchBar()
         setupVM()
+        scrollUpButton.layer.cornerRadius = scrollUpButton.frame.height / 2
     }
     
     private func setupTable() {
@@ -38,6 +40,18 @@ class SourcesViewController: UIViewController {
         vm.delegate = self
         Task {
             await vm.fetchSources()
+        }
+    }
+    
+    @IBAction func scrollUpButtonTapped(_ sender: Any) {
+        let topIndex = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        UIView.animate(withDuration: 0.25) {
+            self.scrollUpButton.alpha = offset < 400 ? 0 : 1
         }
     }
 }

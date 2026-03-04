@@ -85,6 +85,8 @@ class ArticlesViewModel {
             
             let newArticles = response.articles
             // if the count of articles are less than page size (i.e. 10 returned for 20 pageSize, there are no more pages
+            print("⬅️ total articles: \(response.totalResults), with page: \(currentPage), currently getting: \(newArticles.count) articles")
+            
             if newArticles.count < pageSize {
                 canLoadMore = false
             }
